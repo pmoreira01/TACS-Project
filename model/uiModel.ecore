@@ -15,13 +15,6 @@
         eType="#//UIElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UIElement" abstract="true">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
-      <details key="UniqueID" value="UIElement.allInstances()->isUnique(e | e.id)"/>
-      <details key="VisibilityIsBoolean" value="self.visibility = true or self.visibility = false"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="UniqueID VisibilityIsBoolean"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Container" eSuperTypes="#//UIElement">
@@ -46,12 +39,12 @@
         eType="#//UIElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ListType"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" eSuperTypes="#//UIElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ActionType"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ListType">
     <eLiterals name="ordered"/>
     <eLiterals name="unordered" value="1"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Action">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ActionType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ActionType">
     <eLiterals name="LeftClick"/>
