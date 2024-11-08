@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:HTMLDocument
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:a="a.com"
+    xsi:schemaLocation="a.com htmlModel.ecore"
+    title="Example 1">
+  <body xsi:type="a:Button"
+      label="Click Me"
+      onClick="handleClick()"/>
+</a:HTMLDocument>
