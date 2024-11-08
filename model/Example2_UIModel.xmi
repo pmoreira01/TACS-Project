@@ -1,3 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uiModel:UIModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:uiModel="http://tacs/yourmodel/uiModel" xsi:schemaLocation="http://tacs/yourmodel/uiModel uiModel.ecore"/>
+<uiModel:UIModel
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:uiModel="http://tacs/yourmodel/uiModel"
+    xsi:schemaLocation="http://tacs/yourmodel/uiModel uiModel.ecore"
+    title="Example 2">
+  <elements
+      xsi:type="uiModel:List"
+      type="unordered">
+    <children
+        attributes="content=&quot;Item 1&quot;"/>
+    <children
+        attributes="content=&quot;Item 2&quot;"/>
+    <children
+        attributes="content=&quot;Item 3&quot;"/>
+  </elements>
+</uiModel:UIModel>

@@ -14,7 +14,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//UIElement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UIElement" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="UIElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Container" eSuperTypes="#//UIElement">
