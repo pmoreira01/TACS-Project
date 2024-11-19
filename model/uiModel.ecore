@@ -15,25 +15,19 @@
         eType="#//UIElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UIElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Container" eSuperTypes="#//UIElement">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
-      <details key="VisibleContainerHasChildren" value="self.visibility implies self.children->size() > 0"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="VisibleContainerHasChildren"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//UIElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="List" eSuperTypes="#//UIElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
-      <details key="NonEmptyListWhenVisible" value="self.visibility implies self.children->size() > 0"/>
       <details key="MaxChildrenForUnordered" value="self.type = ListType::unordered implies self.children->size() &lt;= 10"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="NonEmptyListWhenVisible MaxChildrenForUnordered"/>
+      <details key="constraints" value="MaxChildrenForUnordered"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//UIElement" containment="true"/>
@@ -41,6 +35,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Action" eSuperTypes="#//UIElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ActionType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Static" eSuperTypes="#//UIElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ContentType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ListType">
     <eLiterals name="ordered"/>
@@ -54,5 +52,9 @@
     <eLiterals name="Drag" value="2"/>
     <eLiterals name="Drop" value="2"/>
     <eLiterals name="Scroll" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ContentType">
+    <eLiterals name="Text" literal="Text"/>
+    <eLiterals name="Image" value="1" literal="Image"/>
   </eClassifiers>
 </ecore:EPackage>
