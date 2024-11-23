@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="uiModel" nsURI="http://tacs/yourmodel/uiModel" nsPrefix="uiModel">
+  <eClassifiers xsi:type="ecore:EClass" name="UIModel">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="AtLeastOneElement" value="self.elements->size() > 0"/>
+      <details key="TitleNotEmpty" value="self.title.size() > 0"/>
+      <details key="TitleMaxLength" value="self.title.size() &lt;= 100"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="AtLeastOneElement TitleNotEmpty TitleMaxLength"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//UIElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UIElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Container" eSuperTypes="#//UIElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//UIElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="List" eSuperTypes="#//UIElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+      <details key="MaxChildrenForUnordered" value="self.type = ListType::unordered implies self.children->size() &lt;= 10"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="MaxChildrenForUnordered"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//UIElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ListType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" eSuperTypes="#//UIElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ActionType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Static" eSuperTypes="#//UIElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ContentType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ListType">
+    <eLiterals name="ordered"/>
+    <eLiterals name="unordered" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ActionType">
+    <eLiterals name="LeftClick"/>
+    <eLiterals name="RightClick"/>
+    <eLiterals name="DoubleClick"/>
+    <eLiterals name="Write" value="1"/>
+    <eLiterals name="Drag" value="2"/>
+    <eLiterals name="Drop" value="2"/>
+    <eLiterals name="Scroll" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ContentType">
+    <eLiterals name="Text" literal="Text"/>
+    <eLiterals name="Image" value="1" literal="Image"/>
+  </eClassifiers>
+</ecore:EPackage>
