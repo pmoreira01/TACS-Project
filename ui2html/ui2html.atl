@@ -5,153 +5,95 @@ module ui2html;
 
 create OUT: htmlModel from IN: uiModel;
 
--- Helper to check if an element is a Container
-helper context uiModel!UIElement def: isContainer(): Boolean =
-    self.oclIsTypeOf(uiModel!Container);
+helper context uiModel!Static def : isText() : Boolean =
+    self.type = #Text;
 
--- Helper to check if an element is a List
-helper context uiModel!UIElement def: isList(): Boolean =
-    self.oclIsTypeOf(uiModel!List);
+helper context uiModel!Static def : isImage() : Boolean =
+    self.type = #Image;
 
--- Helper to check if an element is Static Text
-helper context uiModel!UIElement def: isStaticText(): Boolean =
-    self.oclIsTypeOf(uiModel!Static) and self.type = #Text;
+helper context uiModel!List def : isOrdered() : Boolean =
+    self.type = #ordered;
 
--- Helper to check if an element is Static Image
-helper context uiModel!UIElement def: isStaticImage(): Boolean =
-    self.oclIsTypeOf(uiModel!Static) and self.type = #Image;
+helper context uiModel!List def : isUnordered() : Boolean =
+    self.type = #unordered;
 
--- Helper to check if an element is an Action
-helper context uiModel!UIElement def: isAction(): Boolean =
-    self.oclIsTypeOf(uiModel!Action);
+helper context uiModel!Action def : isButton() : Boolean =
+	self.type = #LeftClick or self.type = #RightClick or self.type = #DoubleClick;
+	
+helper context uiModel!Action def : isInput() : Boolean =
+	self.type = #Write;
 
--- Helper to transform the familyName-like logic for children transformation
-helper context uiModel!UIElement def: htmlChildren: Sequence(htmlModel!HTMLElement) =
-    if self.isContainer() then
-        self.oclAsType(uiModel!Container).children->collect(c | c.transformToHTMLElement())
-    else 
-        if self.isList() then
-            self.oclAsType(uiModel!List).children->collect(c | c.transformToHTMLElement())
-        else
-            Sequence{}
-        endif
-    endif;
+rule UIModel2HTMLDocument {
+	from 
+		s: uiModel!UIModel
+	to 
+		t: htmlModel!HTMLDocument (
+			title <- s.title,
+			body <- s.elements->collect(e | e)
+		)
+}
 
+rule Container2DivContainer {
+	from
+		s: uiModel!Container
+	to
+		t: htmlModel!DivContainer (
+			id <- s.id,
+			style <- s.style,
+			children <- s.children->collect(e | e)
+		)
+}
 
--- Helper to transform a Container into a DivContainer
-helper context uiModel!Container def: transformToDivContainer(): htmlModel!DivContainer =
-    -- Create the DivContainer
-    result = htmlModel!DivContainer;
-    
-    -- Assign properties to the result
-    result.id := self.id;
-    result.style := self.style;
-    result.children := self.children->collect(c | c.transformToHTMLElement());
-
-    -- Return the result
-    result;
-    
-    
-    
--- Transform an element to an HTMLElement (dynamic mapping logic)
-helper context uiModel!UIElement def: transformToHTMLElement(): htmlModel!HTMLElement =
-    if self.isContainer() then
-        self.transformToDivContainer() -- Now the helper is correctly invoked
-    else 
-        if self.isList() then
-            self.transformToList()
-        else 
-            if self.isStaticText() then
-                self.transformToText()
-            else 
-                if self.isStaticImage() then
-                    self.transformToImage()
-                else 
-                    if self.isAction() then
-                        self.transformToButton()
-                    else
-                        Sequence{} -- Return null when no valid transformation is found
-                    endif
-                endif
-            endif
-        endif
-    endif;
-
--- Rule to transform a UIModel into an HTMLDocument
-rule UIModelToHTMLDocument {
+rule List2OrderedList {
     from
-        ui: uiModel!UIModel
+        s: uiModel!List (s.isOrdered())
     to
-        htmlDoc: htmlModel!HTMLDocument (
-            title <- ui.title,
-            body <- ui.elements->collect(e | e.transformToHTMLElement())
+        t: htmlModel!OrderedList (
+            children <- s.children->collect(e | e)
         )
 }
 
--- Rule to transform a Container into a DivContainer
-rule ContainerToDivContainer {
+rule List2UnorderedList {
     from
-        container: uiModel!Container
+        s: uiModel!List (s.isUnordered())
     to
-        divContainer: htmlModel!DivContainer (
-            id <- container.id,
-            style <- container.style,
-            children <- container.children->collect(c | c.transformToHTMLElement())
+        t: htmlModel!UnorderedList (
+            children <- s.children->collect(e | e)
         )
 }
 
--- Rule for Ordered List
-rule OrderedListTransformation {
-    from
-        orderedList: uiModel!List (orderedList.type = #ordered)
+rule Static2Text {
+	from
+        s: uiModel!Static (s.isText())
     to
-        htmlOrderedList: htmlModel!OrderedList (
-            id <- orderedList.id,
-            style <- orderedList.style,
-            children <- orderedList.htmlChildren
+        t: htmlModel!Text (
+            text <- s.content
         )
 }
 
--- Rule for Unordered List
-rule UnorderedListTransformation {
-    from
-        unorderedList: uiModel!List (unorderedList.type = #unordered)
+rule Static2Image {
+	from
+        s: uiModel!Static (s.isImage())
     to
-        htmlUnorderedList: htmlModel!UnorderedList (
-            id <- unorderedList.id,
-            style <- unorderedList.style,
-            children <- unorderedList.htmlChildren
+        t: htmlModel!Image (
+            path <- s.content
         )
 }
 
--- Rule to transform Static Text into a Text element
-rule StaticTextToText {
+rule Action2Button {
     from
-        staticText: uiModel!Static (staticText.isStaticText())
+        s: uiModel!Action (s.isButton())
     to
-        text: htmlModel!Text (
-            text <- staticText.content
+        t: htmlModel!Button (
+            label <- s.content
         )
 }
 
--- Rule to transform Static Image into an Image element
-rule StaticImageToImage {
+rule Action2Input {
     from
-        staticImage: uiModel!Static (staticImage.isStaticImage())
+        s: uiModel!Action (s.isInput())
     to
-        image: htmlModel!Image (
-            path <- staticImage.content
-        )
-}
-
--- Rule to transform an Action into a Button element
-rule ActionToButton {
-    from
-        action: uiModel!Action
-    to
-        button: htmlModel!Button (
-            id <- action.id,
-            label <- action.id,
-            onClick <- 'handle' + action.type.toString()
+        t: htmlModel!Input (
+            value <- s.content
         )
 }

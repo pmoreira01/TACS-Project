@@ -10,10 +10,10 @@
       <details key="constraints" value="TitleNotEmpty BodyNotEmpty"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//HTMLElement"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" upperBound="-1" eType="#//HTMLElement"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="HTMLElement">
+  <eClassifiers xsi:type="ecore:EClass" name="HTMLElement" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="UniqueID IfStyleNotEmpty IfContentNotEmpty"/>
     </eAnnotations>
@@ -46,7 +46,6 @@
       <details key="constraints" value="LabelNotEmpty IfOnClickNotEmpty"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="onClick" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Input" eSuperTypes="#//HTMLElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -57,7 +56,6 @@
       <details key="IfPlaceholderNotEmpty" value="self.placeholder->notEmpty() implies self.placeholder.size() > 0"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="placeholder" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OrderedList" eSuperTypes="#//HTMLElement">

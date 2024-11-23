@@ -37,7 +37,7 @@
         <mapEntry key="OUT" value="htmlModel"/>
     </mapAttribute>
     <mapAttribute key="Path">
-        <mapEntry key="IN" value="/org.eclipse.acceleo.module.sample.test/src/test3.xmi"/>
+        <mapEntry key="IN" value="/ui2html/test2.xmi"/>
         <mapEntry key="OUT" value="/ui2html/result.xmi"/>
         <mapEntry key="htmlModel" value="/ui2html/htmlModel.ecore"/>
         <mapEntry key="uiModel" value="/ui2html/uiModel.ecore"/>

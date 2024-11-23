@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="generate" name="acceleo.html">
-    <property name="ECLIPSE_HOME" value="../../../Documents/eclipse-modeling-2024-09-R-win32-x86_64/eclipse"/>
-    <property name="ECLIPSE_WORKSPACE" value="../.."/>
+    <property name="ECLIPSE_HOME" value="../../../../../../Program Files (x86)/eclipse"/>
+    <property name="ECLIPSE_WORKSPACE" value="../../../../eclipse-workspace"/>
 
     <!-- The classpath with only the dependencies used by the project -->
     <path id="acceleo.html.libraryclasspath">
@@ -29,10 +29,6 @@
         <pathelement location="${ECLIPSE_HOME}/plugins/lpg.runtime.java_2.0.17.v201004271640.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.ocl.common_1.22.0.v20240902-1518.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.ocl.ecore_3.22.0.v20240902-1518.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.acceleo.common_3.7.17.202408201303.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.acceleo.model_3.7.17.202408201303.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.acceleo.profiler_3.7.17.202408201303.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.acceleo.engine_3.7.17.202408201303.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.codegen.ecore_2.39.0.v20240721-0802.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.codegen_2.24.0.v20240721-0802.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/com.google.guava_33.3.0.jre.jar"/>

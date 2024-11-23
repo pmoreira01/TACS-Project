@@ -11,5 +11,24 @@
     <children
         xsi:type="uiModel:Static"
         content="heeeeeeelll"/>
+    <children
+        xsi:type="uiModel:Static"
+        content="heeeeeeelll"/>
+    <children
+        xsi:type="uiModel:List">
+      <children
+          xsi:type="uiModel:Action"/>
+      <children
+          xsi:type="uiModel:Action"
+          type="Write"/>
+    </children>
+  </elements>
+  <elements
+      xsi:type="uiModel:Container">
+    <children
+        xsi:type="uiModel:List">
+      <children
+          xsi:type="uiModel:Static"/>
+    </children>
   </elements>
 </uiModel:UIModel>
