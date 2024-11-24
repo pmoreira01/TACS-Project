@@ -6,6 +6,24 @@
     xmlns:html_model="http://tacs/yourmodel/htmlModel"
     xsi:schemaLocation="http://tacs/yourmodel/htmlModel htmlModel.ecore"
     title="help">
+  <body xsi:type="html_model:DivContainer"
+      style="">
+    <children
+        xsi:type="html_model:Text"
+        style=""
+        text="Username:"/>
+    <children
+        xsi:type="html_model:Input"
+        type="Text"
+        value="username"/>
+    <children
+        xsi:type="html_model:Text"
+        text="Password:"/>
+    <children
+        xsi:type="html_model:Input"
+        type="Text"
+        value="password"/>
+  </body>
   <body xsi:type="html_model:Button"
-      label="idk"/>
+      label="Submit"/>
 </html_model:HTMLDocument>

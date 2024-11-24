@@ -4,6 +4,75 @@
 [template public generateHTMLDocument(aDocument : HTMLDocument)]
 [comment @main /]
 [file (aDocument.title + '.html', false, 'UTF-8')]
-asd
+<html>	
+    <head>
+    	<title>[aDocument.title/]</title>
+	</head>
+	<body>
+	  	[for (element : HTMLElement | aDocument._body)]
+			[generateHTMLElement(element)/]
+	  	[/for]
+    </body>
+</html>
 [/file]
+[/template]
+
+[template public generateHTMLElement(element : HTMLElement)]
+  	[if element.oclIsKindOf(Button)]
+     	[generateButton(element.oclAsType(Button))/]
+	[elseif element.oclIsKindOf(DivContainer)]
+		[generateDivContainer(element.oclAsType(DivContainer))/]
+  	[elseif element.oclIsKindOf(Input)]
+		[generateInput(element.oclAsType(Input))/]
+ 	[elseif element.oclIsKindOf(OrderedList)]
+		[generateOrderedList(element.oclAsType(OrderedList))/]
+  	[elseif element.oclIsKindOf(UnorderedList)]
+		[generateUnorderedList(element.oclAsType(UnorderedList))/]
+  	[elseif element.oclIsKindOf(Text)]
+		[generateText(element.oclAsType(Text))/]
+  	[elseif element.oclIsKindOf(Image)]
+		[generateImage(element.oclAsType(Image))/]
+ 	[/if]
+[/template]
+
+[template public generateButton(aButton : Button)]
+ <button id="[aButton.id/]" style="[aButton.style/]" >
+	[aButton.label/]
+ </button>
+[/template]
+
+[template public generateDivContainer(aDiv : DivContainer)]
+ <div id="[aDiv.id/]" style="[aDiv.style/]">
+    [for (child : HTMLElement | aDiv.children)]
+      	[generateHTMLElement(child)/]
+    [/for]
+ </div>
+[/template]
+
+[template public generateInput(aInput : Input)]
+<input id="[aInput.id/]" type="[aInput.type/]" value="[aInput.value/]" style="[aInput.style/]"/>
+[/template]
+
+[template public generateOrderedList(aList : OrderedList)]
+ <ol id="[aList.id/]" style="[aList.style/]">
+	[for (child : HTMLElement | aList.children)]
+      	<li>[generateHTMLElement(child)/]</li>
+    [/for]
+ </ol>
+[/template]
+
+[template public generateUnorderedList(aList : UnorderedList)]
+<ul id="[aList.id/]" style="[aList.style/]">
+    [for (child : HTMLElement | aList.children)]
+      	<li>[generateHTMLElement(child)/]</li>
+    [/for]
+</ul>
+[/template]
+
+[template public generateText(aText : Text)]
+<p id="[aText.id/]" style="[aText.style/]">[aText.text/]</p>
+[/template]
+
+[template public generateImage(aImage : Image)]
+<img id="[aImage.id/]" src="[aImage.path/]" alt="Image"/ style="[aImage.style/]">
 [/template]
