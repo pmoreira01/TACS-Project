@@ -1,92 +1,9 @@
 [comment encoding = UTF-8 /]
 [module generate('http://tacs/yourmodel/htmlModel')]
 
-[template public generateHTMLElement(aElement : HTMLElement)]
-[if (aElement.oclIsKindOf(DivContainer))]
-<div [if (aElement.id->notEmpty())] id="[aElement.id/]"[/if]
-     [if (aElement.class->notEmpty())] class="[aElement.class/]"[/if]
-     [if (aElement.style->notEmpty())] style="[aElement.style/]"[/if]>
-  [if (aElement.content->notEmpty())][aElement.content/][/if]
-  [if (aElement.children->notEmpty())]
-    [for (child : HTMLElement | aElement.children)]
-      [generateHTMLElement(child)/]
-    [/for]
-  [/if]
-</div>
-[/if]
-
-[if (aElement.oclIsKindOf(Button))]
-<button [if (aElement.id->notEmpty())] id="[aElement.id/]"[/if]
-        [if (aElement.class->notEmpty())] class="[aElement.class/]"[/if]
-        [if (aElement.style->notEmpty())] style="[aElement.style/]"[/if]
-        [if (aElement.onClick->notEmpty())] onclick="[aElement.onClick/]"[/if]>
-  [aElement.label/]
-</button>
-[/if]
-
-[if (aElement.oclIsKindOf(Input))]
-<input type="[aElement.type/]"
-       [if (aElement.placeholder->notEmpty())] placeholder="[aElement.placeholder/]"[/if]
-       [if (aElement.value->notEmpty())] value="[aElement.value/]"[/if]
-       [if (aElement.id->notEmpty())] id="[aElement.id/]"[/if]
-       [if (aElement.class->notEmpty())] class="[aElement.class/]"[/if]
-       [if (aElement.style->notEmpty())] style="[aElement.style/]"[/if] />
-[/if]
-
-[if (aElement.oclIsKindOf(OrderedList))]
-<ol [if (aElement.id->notEmpty())] id="[aElement.id/]"[/if]
-    [if (aElement.class->notEmpty())] class="[aElement.class/]"[/if]
-    [if (aElement.style->notEmpty())] style="[aElement.style/]"[/if]>
-  [if (aElement.children->notEmpty())]
-    [for (item : HTMLElement | aElement.children)]
-      <li>[item.content/]</li>
-    [/for]
-  [/if]
-</ol>
-[/if]
-
-[if (aElement.oclIsKindOf(UnorderedList))]
-<ul [if (aElement.id->notEmpty())] id="[aElement.id/]"[/if]
-    [if (aElement.class->notEmpty())] class="[aElement.class/]"[/if]
-    [if (aElement.style->notEmpty())] style="[aElement.style/]"[/if]>
-  [if (aElement.children->notEmpty())]
-    [for (item : HTMLElement | aElement.children)]
-      <li>[item.content/]</li>
-    [/for]
-  [/if]
-</ul>
-[/if]
-
-[if (aElement.oclIsKindOf(Text))]
-<p [if (aElement.id->notEmpty())] id="[aElement.id/]"[/if]
-   [if (aElement.class->notEmpty())] class="[aElement.class/]"[/if]
-   [if (aElement.style->notEmpty())] style="[aElement.style/]"[/if]>
-  [aElement.text/]
-</p>
-[/if]
-
-[if (aElement.oclIsKindOf(Image))]
-<img [if (aElement.id->notEmpty())] id="[aElement.id/]"[/if]
-     [if (aElement.class->notEmpty())] class="[aElement.class/]"[/if]
-     [if (aElement.style->notEmpty())] style="[aElement.style/]"[/if]
-     [if (aElement.path->notEmpty())] src="[aElement.path/]"[/if] />
-[/if]
-[/template]
-
 [template public generateHTMLDocument(aDocument : HTMLDocument)]
 [comment @main /]
 [file (aDocument.title + '.html', false, 'UTF-8')]
-<html>
-  <head>
-    <title>[aDocument.title/]</title>
-  </head>
-  <body>
-    [if (aDocument.body->notEmpty())]
-      [for (element : HTMLElement | aDocument.body)]
-        [generateHTMLElement(element)/]
-      [/for]
-    [/if]
-  </body>
-</html>
+asd
 [/file]
 [/template]
